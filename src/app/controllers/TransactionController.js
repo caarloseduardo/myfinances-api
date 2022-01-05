@@ -2,7 +2,7 @@ const TransactionsRepository = require('../repositories/TransactionsRepository')
 
 class TransactionController {
   async index(request, response) {
-    const transactions = TransactionsRepository.findAll();
+    const transactions = await TransactionsRepository.findAll();
 
     response.json(transactions);
   }
