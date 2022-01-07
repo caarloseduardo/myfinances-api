@@ -18,6 +18,18 @@ class TransactionsRepository {
     return row;
   }
 
+  async update(id, {
+    description, amount, date,
+  }) {
+    const [row] = await db.query(`
+      UPDATE transactions
+      SET description = $1, amount = $2, date = $3
+      WHERE id = $4
+      RETURNING *
+    `, [description, amount, date, id]);
+    return row;
+  }
+
   async delete(id) {
     const deleteOp = await db.query('DELETE FROM transactions WHERE id = $1', [id]);
     return deleteOp;
