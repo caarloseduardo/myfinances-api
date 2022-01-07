@@ -36,6 +36,14 @@ class TransactionController {
 
     response.status(201).json(transaction);
   }
+
+  async delete(request, response) {
+    const { id } = request.params;
+
+    await TransactionsRepository.delete(id);
+
+    response.sendStatus(204);
+  }
 }
 
 module.exports = new TransactionController();
